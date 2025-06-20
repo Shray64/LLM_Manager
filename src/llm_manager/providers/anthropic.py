@@ -22,9 +22,9 @@ class AnthropicProvider(BaseProvider):
 
         message_kwargs = {
             "model": model_config.get("model_id"),
-            "max_tokens": model_config.get("max_tokens", 1000),
+            "max_tokens": model_config.get("max_tokens", 10000),
             "temperature": model_config.get("temperature", 0.7),
-            "system": model_config.get("system", "You are a helpful AI assistant."),
+            "system": model_config.get("system", ""),
             "messages": [{"role": "user", "content": prompt}],
         }
 

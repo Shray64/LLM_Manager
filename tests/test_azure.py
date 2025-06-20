@@ -11,5 +11,7 @@ manager = LLMManager()
 # print(response)
 
 # Try another model
-response = manager.generate("What are the benefits of containerization?", model="azure/o4_mini")
+response = manager.generate("What are the benefits of containerization?",
+                            model="azure/gpt4o",
+                            reasoning_effort = "high")
 print(response)
