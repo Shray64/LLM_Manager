@@ -9,7 +9,7 @@ providers:
         azure_deployment: "${AZURE_DEPLOYMENT}"
         model_id: "gpt-4o"
       
-      o1_mini:
+      o1-mini:
         api_key: "${AZURE_API_KEY}"
         api_version: "${AZURE_API_VERSION:-2023-05-15}"
         azure_endpoint: "${AZURE_API_BASE}"
@@ -22,21 +22,13 @@ providers:
         azure_endpoint: "${AZURE_o1_API_BASE}"
         azure_deployment: "${AZURE_o1_DEPLOYMENT}"
         model_id: "o1"
-        reasoning_effort:
-          type: enabled
-          default: medium
-          allowed_values: [low, medium, high]
       
-      o3_mini:
+      o3-mini:
         api_key: "${AZURE_o1_API_KEY}"
         api_version: "${AZURE_o1_API_VERSION:-2024-12-01-preview}"
         azure_endpoint: "${AZURE_o1_API_BASE}"
         azure_deployment: "${AZURE_o3_mini_DEPLOYMENT}"
         model_id: "o3-mini"
-        reasoning_effort:
-          type: enabled
-          default: medium
-          allowed_values: [low, medium, high]
       
       o3:
         api_key: "${AZURE_o1_API_KEY}"
@@ -44,80 +36,70 @@ providers:
         azure_endpoint: "${AZURE_o3_API_BASE}"
         azure_deployment: "${AZURE_o3_DEPLOYMENT}"
         model_id: "o3"
-        reasoning_effort:
-          type: enabled
-          default: medium
-          allowed_values: [low, medium, high]
 
-      o4_mini:
+      o4-mini:
         api_key: "${AZURE_o1_API_KEY}"
         api_version: "${AZURE_o1_API_VERSION:-2024-12-01-preview}"
         azure_endpoint: "${AZURE_o1_API_BASE}"
         azure_deployment: "${AZURE_o4_mini_DEPLOYMENT}"
         model_id: "o4-mini"
-        reasoning_effort:
-          type: enabled
-          default: medium
-          allowed_values: [low, medium, high]
 
   anthropic:
     enabled: true
     api_key: "${ANTHROPIC_API_KEY}"
     models:
-      claude_3_5:
+      claude-sonnet-3.5:
         model_id: "claude-3-5-sonnet-20241022"
         max_tokens: 1000
         temperature: 0.7
         system: ""
       
-      claude_3_7:
+      claude-sonnet-3.7:
         model_id: "claude-3-7-sonnet-20250219"
-        max_tokens: 20000
+        max_tokens: 1000
         temperature: 0.7
         system: ""
-        thinking:
-          type: "enabled"
-      
-      # claude_3_7_thinking_8k:
-      #   model_id: "claude-3-7-sonnet-20250219"
-      #   max_tokens: 20000
-      #   temperature: 1.0
-      #   system: ""
-      #   thinking:
-      #     type: "enabled"
-      #     budget_tokens: 8000
-
-      # claude_3_7_thinking_16k:
-      #   model_id: "claude-3-7-sonnet-20250219"
-      #   max_tokens: 20000
-      #   temperature: 1.0
-      #   system: ""
-      #   thinking:
-      #     type: "enabled"
-      #     budget_tokens: 8000
-      
-      # claude_3_7_thinking_64k:
-      #   model_id: "claude-3-7-sonnet-20250219"
-      #   max_tokens: 128000
-      #   temperature: 1.0
-      #   system: "You are a helpful AI assistant."
-      #   thinking:
-      #     type: "enabled"
-      #     budget_tokens: 64000
   
   abacus:
     enabled: true
     api_key: "${ABACUS_API_KEY}"
     models:
-      gemini_2_5_pro:
+      gemini-2.5-pro:
         model_id: "GEMINI_2_5_PRO"
         temperature: 0.7
         system: ""
       
-      deepseek_r1:
+      deepseek-r1:
         model_id: "DEEPSEEK_R1"
         temperature: 0.7
         system: ""
+
+      o4-mini:
+        model_id: "OPENAI_O4_MINI"
+        system: ""
+
+      o4-mini-high:
+        model_id: "OPENAI_O4_MINI_HIGH"
+        system: ""
+      
+  bedrock:
+      enabled: true
+      region_name: "us-east-2"
+      aws_access_key_id: "${AWS_ACCESS_KEY}"
+      aws_secret_access_key: "${AWS_SECRET_ACCESS_KEY}"
+      # Default settings for all Bedrock models
+      defaults:
+        temperature: 0.7
+        max_tokens: 1000
+        top_p: 0.9
+      models:
+        claude-sonnet-4:
+          model_id: "arn:aws:bedrock:us-east-2:931886963315:inference-profile/us.anthropic.claude-sonnet-4-20250514-v1:0"
+          max_tokens: 4000
+          system: ""
+
+        claude-opus-4:
+          model_id: "arn:aws:bedrock:us-east-2:931886963315:inference-profile/anthropic.claude-opus-4-20250514-v1:0"
 
 # Default settings
 default_provider: "${DEFAULT_PROVIDER:-azure}"
