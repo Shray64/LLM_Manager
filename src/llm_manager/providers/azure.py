@@ -8,7 +8,7 @@ class AzureProvider(BaseProvider):
     def __init__(self, config):
         super().__init__(config)
         self.models = config.get("models", {})
-        self.reasoning_effort_models = ["o1", "o3_mini", "o3", "o4_mini"]
+        self.reasoning_effort_models = ["o1", "o3-mini", "o3", "o4-mini"]
     
     def generate(self, prompt, model_id, **kwargs):
         """Generate a response using the specified Azure model"""
@@ -21,6 +21,13 @@ class AzureProvider(BaseProvider):
         model_config = self.models[model_id]
 
         request_kwargs = kwargs.copy()
+
+        if "system" in request_kwargs:
+            system_prompt = request_kwargs.get("system", "")
+            request_kwargs.pop("system")
+
+        else:
+            system_prompt = ""
 
         if "reasoning_effort" in request_kwargs:
             model_name = model_config.get("model_id", "").lower()
@@ -48,7 +55,8 @@ class AzureProvider(BaseProvider):
         
         response = client.chat.completions.create(
             model=model_config.get("model_id"),
-            messages=[{"role": "user", "content": prompt}],
+            messages=[{"role":"system", "content": system_prompt},
+                      {"role": "user", "content": prompt}],
             **request_kwargs
         )
         

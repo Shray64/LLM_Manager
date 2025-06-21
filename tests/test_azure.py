@@ -3,15 +3,30 @@ from llm_manager import LLMManager
 # Initialize the manager
 manager = LLMManager()
 
-# Generate a response using a model alias
+##AZURE
+
 # response = manager.generate("Explain quantum computing in simple terms", 
-#                             model="anthropic/claude_3_7",
-#                             max_tokens = 20000, 
-#                             thinking_tokens = 800)
+#                             model="azure/gpt4o",
+#                             temperature = 0.3,
+#                             max_completion_tokens = 3000,
+#                             reasoning_effort = "medium")
+
+# Generate a response using a model alias
+response = manager.generate("Explain quantum computing in simple terms", 
+                            model="anthropic/claude-sonnet-3.7",
+                            max_tokens = 3000,)
+                            # thinking_tokens = 1024)
+print(response)
+
+# response = manager.generate("Explain quantum computing in simple terms", 
+#                             model="bedrock/claude-sonnet-4",
+#                             max_tokens = 10000)
 # print(response)
 
 # Try another model
-response = manager.generate("What are the benefits of containerization?",
-                            model="azure/gpt4o",
-                            reasoning_effort = "high")
+# response = manager.generate("What are the benefits of containerization?",
+#                             model="abacus/deepseek-r1",
+#                             max_tokens = 32000,
+#                             # thinking_tokens = 16000
+#                             )
 print(response)
