@@ -20,9 +20,7 @@ class AbacusProvider(BaseProvider):
 
         response = client.evaluate_prompt(
             prompt=prompt,
-            system_message=model_config.get("system", ""),
             llm_name=model_config.get("model_id"),
-            temperature=model_config.get("temperature", 0.7),
             **kwargs
         )
 

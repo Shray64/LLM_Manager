@@ -13,7 +13,7 @@ class BedrockProvider:
         self.models = config.get("models", {})
         self._client = None
         # Models that support thinking parameter
-        self.thinking_supported_models = ["claude-sonnet-4", "claude-opus-4"]
+        self.thinking_supported_models = ["claude-sonnet-4", "claude-opus-4", "claude-sonnet-3.7"]
     
     def is_enabled(self) -> bool:
         """Check if the provider is enabled"""
@@ -42,18 +42,14 @@ class BedrockProvider:
         
         if model_id not in self.models:
             raise ValueError(f"Unknown Bedrock model: {model_id}")
-        
-        # Get provider-level defaults
-        provider_defaults = self.config.get("defaults", {})
+    
         
         # Get model-specific config
         model_config = self.models[model_id]
         
-        # Merge defaults with model-specific config (model config takes precedence)
-        merged_config = {**provider_defaults, **model_config}
         
         # Get the actual model ARN
-        model_arn = merged_config.get("model_id")
+        model_arn = model_config.get("model_id")
         
         # Check if this is a Claude model (based on ARN)
         is_claude = "anthropic" in model_arn.lower()
@@ -66,20 +62,12 @@ class BedrockProvider:
         
         # Check if thinking_tokens is in kwargs
         if "thinking_tokens" in kwargs and supports_thinking and is_claude:
-            original_temp = merged_config.get("temperature", 0.7)
-            if "temperature" in kwargs:
-                original_temp = kwargs["temperature"]
-                
-            # Set temperature to 1.0 as required for thinking
-            kwargs["temperature"] = 1.0
-            kwargs["top_p"] = 0.95
             
             thinking_tokens = kwargs.pop("thinking_tokens")
             # Track if thinking is being used
             using_thinking = True
             
             # Inform user about temperature change
-            print(f"Notice: Temperature has been set to 1.0 (from {original_temp}) and top_p has been set to 0.95 because thinking mode requires it.")
             
         elif "thinking_tokens" in kwargs and not supports_thinking and is_claude:
             # Remove the parameter and warn the user
@@ -92,24 +80,18 @@ class BedrockProvider:
             )
             print(warning_msg)
         
-        # Update merged_config with any remaining kwargs (user-provided parameters take precedence)
-        merged_config.update(kwargs)
-        
         # Prepare the payload based on model type
         if is_claude:
             payload = {
                 "anthropic_version": "bedrock-2023-05-31",
-                "max_tokens": merged_config.get("max_tokens", 1000),
-                "temperature": merged_config.get("temperature", 0.7),
-                "top_p": merged_config.get("top_p", 0.9),
+                "max_tokens": kwargs.get("max_tokens", 1000),
+                "temperature": kwargs.get("temperature", 0.7),
+                "system": kwargs.get("system_message", ""),
                 "messages": [
                     {"role": "user", "content": prompt}
                 ]
             }
-            
-            # Add system prompt if provided
-            if merged_config.get("system"):
-                payload["system"] = merged_config.get("system")
+        
                 
             # Add thinking configuration if applicable
             if using_thinking:
@@ -120,22 +102,23 @@ class BedrockProvider:
                 
             # Add optional parameters if provided
             for param in ["top_k", "stop_sequences"]:
-                if param in merged_config:
-                    payload[param] = merged_config[param]
+                if param in kwargs:
+                    payload[param] = kwargs[param]
         else:
             # Generic payload for other models
             # This would need to be customized based on the specific model requirements
             payload = {
                 "prompt": prompt,
-                "max_tokens": merged_config.get("max_tokens", 1000),
-                "temperature": merged_config.get("temperature", 0.7),
-                "top_p": merged_config.get("top_p", 0.9),
+                "max_tokens": kwargs.get("max_tokens", 1000),
+                "temperature": kwargs.get("temperature", 0.7),
+                "top_p": kwargs.get("top_p", 0.95),
+                "system": kwargs.get("system_message", ""),
             }
             
             # Add other model-specific parameters as needed
             for param in ["top_k", "stop", "frequency_penalty", "presence_penalty"]:
-                if param in merged_config:
-                    payload[param] = merged_config[param]
+                if param in kwargs:
+                    payload[param] = kwargs[param]
         
         try:
             response = self.client.invoke_model(
@@ -158,7 +141,7 @@ class BedrockProvider:
                         
                         for content_block in response_body['content']:
                             if content_block.get('type') == 'thinking':
-                                thinking_text = content_block.get('text', '')
+                                thinking_text = content_block.get('thinking', '')
                             elif content_block.get('type') == 'text':
                                 response_text = content_block.get('text', '')
                         
