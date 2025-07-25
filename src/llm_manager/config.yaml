@@ -32,7 +32,7 @@ providers:
       
       o3:
         api_key: "${AZURE_o1_API_KEY}"
-        api_version: "${AZURE_o1_API_VERSION:-2024-12-01-preview}"
+        api_version: "${AZURE_o1_API_VERSION:-2025-04-01-preview}"
         azure_endpoint: "${AZURE_o3_API_BASE}"
         azure_deployment: "${AZURE_o3_DEPLOYMENT}"
         model_id: "o3"
@@ -48,17 +48,14 @@ providers:
     enabled: true
     api_key: "${ANTHROPIC_API_KEY}"
     models:
+      claude-sonnet-4:
+        model_id: "claude-sonnet-4-20250514"
+      
       claude-sonnet-3.5:
         model_id: "claude-3-5-sonnet-20241022"
-        max_tokens: 1000
-        temperature: 0.7
-        system: ""
       
       claude-sonnet-3.7:
         model_id: "claude-3-7-sonnet-20250219"
-        max_tokens: 1000
-        temperature: 0.7
-        system: ""
   
   abacus:
     enabled: true
@@ -66,37 +63,36 @@ providers:
     models:
       gemini-2.5-pro:
         model_id: "GEMINI_2_5_PRO"
-        temperature: 0.7
-        system: ""
-      
+
       deepseek-r1:
         model_id: "DEEPSEEK_R1"
-        temperature: 0.7
-        system: ""
+
+      o3-low:
+        model_id: "O3_LOW"
+
+      o3-medium:
+        model_id: "O3_MEDIUM"
+
+      o3-high:
+        model_id: "O3_HIGH"
 
       o4-mini:
         model_id: "OPENAI_O4_MINI"
-        system: ""
 
       o4-mini-high:
         model_id: "OPENAI_O4_MINI_HIGH"
-        system: ""
       
   bedrock:
       enabled: true
       region_name: "us-east-2"
       aws_access_key_id: "${AWS_ACCESS_KEY}"
       aws_secret_access_key: "${AWS_SECRET_ACCESS_KEY}"
-      # Default settings for all Bedrock models
-      defaults:
-        temperature: 0.7
-        max_tokens: 1000
-        top_p: 0.9
       models:
+        claude-sonnet-3.7:
+          model_id: "arn:aws:bedrock:us-east-2:931886963315:inference-profile/us.anthropic.claude-3-7-sonnet-20250219-v1:0"
+
         claude-sonnet-4:
           model_id: "arn:aws:bedrock:us-east-2:931886963315:inference-profile/us.anthropic.claude-sonnet-4-20250514-v1:0"
-          max_tokens: 4000
-          system: ""
 
         claude-opus-4:
           model_id: "arn:aws:bedrock:us-east-2:931886963315:inference-profile/anthropic.claude-opus-4-20250514-v1:0"

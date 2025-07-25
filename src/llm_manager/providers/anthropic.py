@@ -8,7 +8,7 @@ class AnthropicProvider(BaseProvider):
         super().__init__(config)
         self.models = config.get("models", {})
         # Models that support thinking parameter
-        self.thinking_supported_models = ["claude-sonnet-3.7"]
+        self.thinking_supported_models = ["claude-sonnet-4", "claude-sonnet-3.7"]
     
     def generate(self, prompt, model_id, **kwargs):
         """Generate a response using the specified Anthropic model"""
@@ -39,10 +39,13 @@ class AnthropicProvider(BaseProvider):
         # Add system prompt if provided
         if merged_config.get("system"):
             request_params["system"] = merged_config.get("system")
-        
+
         # Handle thinking parameter
         supports_thinking = any(model in model_id for model in self.thinking_supported_models)
+        # supports_thinking = True if model_id in self.thinking_supported_models else False
+
         model_name = merged_config.get("model_id", "").lower()
+        # model_name = model_id
 
         using_thinking = False
         
