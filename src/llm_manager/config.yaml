@@ -97,6 +97,13 @@ providers:
         claude-opus-4:
           model_id: "arn:aws:bedrock:us-east-2:931886963315:inference-profile/anthropic.claude-opus-4-20250514-v1:0"
 
+  vLLM:
+    enabled: true
+    models:
+      qwen2-7b:
+        model_id: "Qwen/Qwen2-7B-Instruct"
+
+
 # Default settings
 default_provider: "${DEFAULT_PROVIDER:-azure}"
 default_model: "${DEFAULT_MODEL:-gpt4o}"

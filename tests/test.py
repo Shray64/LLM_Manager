@@ -5,13 +5,13 @@ manager = LLMManager()
 
 ## AZURE ##
 
-response = manager.generate("Explain quantum computing in simple terms", 
-                            model="azure/o3",
-                            temperature = 1,
-                            max_completion_tokens = 300,
-                            reasoning_effort = "low")
+# response = manager.generate("Explain quantum computing in simple terms", 
+#                             model="azure/o3",
+#                             temperature = 1,
+#                             max_completion_tokens = 300,
+#                             reasoning_effort = "low")
 
-print(response)
+# print(response)
 
 # ANTHROPIC ##
 # response = manager.generate("Explain quantum computing in simple terms", 
@@ -41,3 +41,11 @@ print(response)
 
 
 # manager.list_models()
+
+# vLLM ##
+
+response = manager.generate("Explain quantum computing in simple terms", 
+                            model="vLLM/qwen2-7b")
+
+
+print(response)
