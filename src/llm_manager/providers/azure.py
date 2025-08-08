@@ -26,15 +26,14 @@ class AzureProvider(BaseProvider):
         if "system" in request_kwargs:
             system_prompt = request_kwargs.get("system", "")
             request_kwargs.pop("system")
-
         else:
             system_prompt = ""
 
+        model_name = model_config.get("model_id", "").lower()
+        supports_reasoning = any(model in model_name for model in self.reasoning_effort_models)
+        supports_reasoning_summary = any(model in model_name for model in self.reasoning_summary_supported)
+
         if "reasoning_effort" in request_kwargs:
-            model_name = model_config.get("model_id", "").lower()
-            supports_reasoning = any(model in model_name for model in self.reasoning_effort_models)
-            supports_reasoning_summary = any(model in model_name for model in self.reasoning_summary_supported)
-            
             if not supports_reasoning:
                 request_kwargs.pop("reasoning_effort")
 
@@ -46,8 +45,6 @@ class AzureProvider(BaseProvider):
                 )
                 print(warning_msg)
                 warnings.warn(warning_msg)
-
-            
         
         client = AzureOpenAI(
             api_key=model_config.get("api_key"),
@@ -57,7 +54,6 @@ class AzureProvider(BaseProvider):
         )
 
         if supports_reasoning_summary:
-
             response = client.responses.create(
                 input=prompt,
                 model=model_config.get("model_id"), # replace with model deployment name
@@ -67,15 +63,27 @@ class AzureProvider(BaseProvider):
                 }
             )
 
-            print(response)
-
             return {
-                    "thinking": response.output[0].summary[0].text if response.output[0].summary else "",
-                    "response": response.output[1].content[0].text
-                }
+                "thinking": response.output[0].summary[0].text if response.output[0].summary else "",
+                "response": response.output[1].content[0].text,
+                "reasoning_tokens": getattr(response.usage.output_tokens_details, 'reasoning_tokens', None)
+            }
+
+        elif supports_reasoning:
+            # For o1 models that support reasoning but not summary
+            response = client.chat.completions.create(
+                model=model_config.get("model_id"),
+                messages=[{"role":"system", "content": system_prompt},
+                        {"role": "user", "content": prompt}],
+                **request_kwargs
+            )
+            
+            return {
+                "response": response.choices[0].message.content,
+                "reasoning_tokens": getattr(response.usage, 'reasoning_tokens', None) if hasattr(response, 'usage') else None
+            }
 
         else:
-        
             response = client.chat.completions.create(
                 model=model_config.get("model_id"),
                 messages=[{"role":"system", "content": system_prompt},

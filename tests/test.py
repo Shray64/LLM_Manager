@@ -3,15 +3,15 @@ from llm_manager import LLMManager
 # Initialize the manager
 manager = LLMManager()
 
-## AZURE ##
+# AZURE ##
 
-response = manager.generate("Explain quantum computing in simple terms", 
-                            model="azure/o3",
-                            temperature = 1,
-                            max_completion_tokens = 300,
-                            reasoning_effort = "low")
+# response = manager.generate("Prove the pythagoras theorem", 
+#                             model="azure/o3",
+#                             temperature = 1,
+#                             max_completion_tokens = 3000,
+#                             reasoning_effort = "medium")
 
-print(response)
+# print(response.get('reasoning_tokens', 0))
 
 # ANTHROPIC ##
 # response = manager.generate("Explain quantum computing in simple terms", 
@@ -24,13 +24,13 @@ print(response)
 
 ## AWS BEDROCK ##
 
-# response = manager.generate("Explain quantum computing in simple terms", 
-#                             model="bedrock/claude-sonnet-3.7",
-#                             max_tokens = 1000,
-#                             # thinking_tokens = 32000,
-#                             # temperature = 1)
-# )
-# print(response)
+response = manager.generate("Explain quantum computing in simple terms", 
+                            model="bedrock/claude-sonnet-3.7",
+                            # max_tokens = 1000,
+                            # thinking_tokens = 32000,
+                            # temperature = 1)
+)
+print(response)
 
 ## ABACUS ##
 # response = manager.generate("What are the benefits of containerization?",
@@ -41,3 +41,11 @@ print(response)
 
 
 # manager.list_models()
+
+# vLLM ##
+
+# response = manager.generate("Explain quantum computing in simple terms", 
+#                             model="vLLM/qwen2-7b")
+
+
+# print(response)
