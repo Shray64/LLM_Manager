@@ -5,13 +5,13 @@ manager = LLMManager()
 
 # AZURE ##
 
-# response = manager.generate("Prove the pythagoras theorem", 
-#                             model="azure/o3",
-#                             temperature = 1,
-#                             max_completion_tokens = 3000,
-#                             reasoning_effort = "medium")
+response = manager.generate("Prove the pythagoras theorem", 
+                            model="azure/gpt-5",
+                            temperature = 1,
+                            max_completion_tokens = 3000,
+                            reasoning_effort = "medium")
 
-# print(response.get('reasoning_tokens', 0))
+print(response)
 
 # ANTHROPIC ##
 # response = manager.generate("Explain quantum computing in simple terms", 
@@ -24,13 +24,13 @@ manager = LLMManager()
 
 ## AWS BEDROCK ##
 
-response = manager.generate("Explain quantum computing in simple terms", 
-                            model="bedrock/claude-sonnet-3.7",
-                            # max_tokens = 1000,
-                            # thinking_tokens = 32000,
-                            # temperature = 1)
-)
-print(response)
+# response = manager.generate("Explain quantum computing in simple terms", 
+#                             model="bedrock/claude-sonnet-3.7",
+#                             # max_tokens = 1000,
+#                             # thinking_tokens = 32000,
+#                             # temperature = 1)
+# )
+# print(response)
 
 ## ABACUS ##
 # response = manager.generate("What are the benefits of containerization?",

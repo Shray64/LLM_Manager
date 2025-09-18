@@ -8,8 +8,8 @@ class AzureProvider(BaseProvider):
     def __init__(self, config):
         super().__init__(config)
         self.models = config.get("models", {})
-        self.reasoning_effort_models = ["o1", "o3-mini", "o3", "o4-mini"]
-        self.reasoning_summary_supported= ["o3", "o4-mini"]
+        self.reasoning_effort_models = ["o1", "o3-mini", "o3", "o4-mini", "gpt-5"]
+        self.reasoning_summary_supported= ["o3", "o4-mini", "gpt-5"]
     
     def generate(self, prompt, model_id, **kwargs):
         """Generate a response using the specified Azure model"""

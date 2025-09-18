@@ -44,6 +44,20 @@ providers:
         azure_deployment: "${AZURE_o4_mini_DEPLOYMENT}"
         model_id: "o4-mini"
 
+      o4-mini:
+        api_key: "${AZURE_o1_API_KEY}"
+        api_version: "${AZURE_o1_API_VERSION:-2024-12-01-preview}"
+        azure_endpoint: "${AZURE_o1_API_BASE}"
+        azure_deployment: "${AZURE_o4_mini_DEPLOYMENT}"
+        model_id: "o4-mini"
+
+      gpt-5:
+        api_key: "${AZURE_o1_API_KEY}"
+        api_version: "${AZURE_o1_API_VERSION:-2025-03-01-preview}"
+        azure_endpoint: "${AZURE_o1_API_BASE}"
+        azure_deployment: "${AZURE_gpt5_DEPLOYMENT}"
+        model_id: "gpt-5"
+
   anthropic:
     enabled: true
     api_key: "${ANTHROPIC_API_KEY}"
