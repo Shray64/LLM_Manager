@@ -1,4 +1,5 @@
 from llm_manager import LLMManager
+import asyncio
 
 # Initialize the manager
 manager = LLMManager()
@@ -6,10 +7,12 @@ manager = LLMManager()
 # AZURE ##
 
 response = manager.generate("Prove the pythagoras theorem", 
-                            model="azure/gpt-5",
-                            temperature = 1,
-                            max_completion_tokens = 3000,
-                            reasoning_effort = "medium")
+                            model="azure/o1-mini",
+                            # max_output_tokens = 3000,
+                            # reasoning_effort = "low",
+                            # summary_level = "detailed",
+                            # max_completion_tokens = 3000
+                            )
 
 print(response)
 

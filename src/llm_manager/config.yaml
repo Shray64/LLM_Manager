@@ -3,60 +3,67 @@ providers:
     enabled: true
     models:
       gpt4o: 
-        api_key: "${AZURE_API_KEY}"
+        api_key: "${AZURE_API_KEY_OLD}"
         api_version: "${AZURE_API_VERSION:-2023-05-15}"
-        azure_endpoint: "${AZURE_API_BASE}"
+        azure_endpoint: "${AZURE_API_BASE_OLD}"
         azure_deployment: "${AZURE_DEPLOYMENT}"
         model_id: "gpt-4o"
+        reasoning_effort: false
+        reasoning_summary: false
       
       o1-mini:
-        api_key: "${AZURE_API_KEY}"
+        api_key: "${AZURE_API_KEY_OLD}"
         api_version: "${AZURE_API_VERSION:-2023-05-15}"
-        azure_endpoint: "${AZURE_API_BASE}"
+        azure_endpoint: "${AZURE_API_BASE_OLD}"
         azure_deployment: "${AZURE_o1_mini_DEPLOYMENT}"
         model_id: "o1-mini"
+        reasoning_effort: false
+        reasoning_summary: false
 
       o1:
-        api_key: "${AZURE_o1_API_KEY}"
-        api_version: "${AZURE_o1_API_VERSION:-2024-12-01-preview}"
-        azure_endpoint: "${AZURE_o1_API_BASE}"
+        api_key: "${AZURE_API_KEY}"
+        api_version: "${AZURE_API_VERSION:-2024-12-01-preview}"
+        azure_endpoint: "${AZURE_API_BASE}"
         azure_deployment: "${AZURE_o1_DEPLOYMENT}"
         model_id: "o1"
+        reasoning_effort: true
+        reasoning_summary: false
       
       o3-mini:
-        api_key: "${AZURE_o1_API_KEY}"
-        api_version: "${AZURE_o1_API_VERSION:-2024-12-01-preview}"
-        azure_endpoint: "${AZURE_o1_API_BASE}"
+        api_key: "${AZURE_API_KEY}"
+        api_version: "${AZURE_API_VERSION:-2025-04-01-preview}"
+        azure_endpoint: "${AZURE_API_BASE}"
         azure_deployment: "${AZURE_o3_mini_DEPLOYMENT}"
         model_id: "o3-mini"
+        reasoning_effort: true
+        reasoning_summary: true
       
       o3:
-        api_key: "${AZURE_o1_API_KEY}"
-        api_version: "${AZURE_o1_API_VERSION:-2025-04-01-preview}"
-        azure_endpoint: "${AZURE_o3_API_BASE}"
+        api_key: "${AZURE_API_KEY}"
+        api_version: "${AZURE_API_VERSION:-2025-04-01-preview}"
+        azure_endpoint: "${AZURE_API_BASE}"
         azure_deployment: "${AZURE_o3_DEPLOYMENT}"
         model_id: "o3"
+        reasoning_effort: true
+        reasoning_summary: true
 
       o4-mini:
-        api_key: "${AZURE_o1_API_KEY}"
-        api_version: "${AZURE_o1_API_VERSION:-2024-12-01-preview}"
-        azure_endpoint: "${AZURE_o1_API_BASE}"
+        api_key: "${AZURE_API_KEY}"
+        api_version: "${AZURE_API_VERSION:-2024-12-01-preview}"
+        azure_endpoint: "${AZURE_API_BASE}"
         azure_deployment: "${AZURE_o4_mini_DEPLOYMENT}"
         model_id: "o4-mini"
-
-      o4-mini:
-        api_key: "${AZURE_o1_API_KEY}"
-        api_version: "${AZURE_o1_API_VERSION:-2024-12-01-preview}"
-        azure_endpoint: "${AZURE_o1_API_BASE}"
-        azure_deployment: "${AZURE_o4_mini_DEPLOYMENT}"
-        model_id: "o4-mini"
+        reasoning_effort: true
+        reasoning_summary: true
 
       gpt-5:
-        api_key: "${AZURE_o1_API_KEY}"
-        api_version: "${AZURE_o1_API_VERSION:-2025-03-01-preview}"
-        azure_endpoint: "${AZURE_o1_API_BASE}"
+        api_key: "${AZURE_API_KEY}"
+        api_version: "${AZURE_API_VERSION:-2025-03-01-preview}"
+        azure_endpoint: "${AZURE_API_BASE}"
         azure_deployment: "${AZURE_gpt5_DEPLOYMENT}"
         model_id: "gpt-5"
+        reasoning_effort: true
+        reasoning_summary: true
 
   anthropic:
     enabled: true

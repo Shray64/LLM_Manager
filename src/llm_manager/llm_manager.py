@@ -55,3 +55,30 @@ class LLMManager:
     def list_aliases(self):
         """List all model aliases"""
         return self.config.get("model_aliases", {})
+    
+    async def generate_async(self, prompt, model=None, **kwargs):
+        """Generate a response asynchronously using the specified model"""
+        if model is None:
+            model = self.config.get("default_model")
+        
+        # Resolve model alias if needed
+        if model in self.config.get("model_aliases", {}):
+            model_path = self.config["model_aliases"][model]
+            provider_name, model_id = model_path.split("/")
+        else:
+            # Assume format is provider/model_id
+            try:
+                provider_name, model_id = model.split("/")
+            except ValueError:
+                raise ValueError(f"Invalid model format: {model}. Use 'provider/model_id' format or a defined alias.")
+        
+        # Check if provider exists and is enabled
+        if provider_name not in self.providers:
+            raise ValueError(f"Provider '{provider_name}' not found or not enabled")
+        
+        # Check if provider supports async
+        if not hasattr(self.providers[provider_name], 'generate_async'):
+            raise ValueError(f"Provider '{provider_name}' does not support async calls")
+        
+        # Generate the response asynchronously
+        return await self.providers[provider_name].generate_async(prompt, model_id, **kwargs)
