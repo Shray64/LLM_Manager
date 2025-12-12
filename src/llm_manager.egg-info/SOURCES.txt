@@ -15,7 +15,10 @@ src/llm_manager/providers/anthropic.py
 src/llm_manager/providers/azure.py
 src/llm_manager/providers/base.py
 src/llm_manager/providers/bedrock.py
+src/llm_manager/providers/huggingface.py
 src/llm_manager/providers/ollama.py
+src/llm_manager/providers/vLLM.py
 src/llm_manager/utils/__init__.py
 src/llm_manager/utils/config.py
 tests/test.py
+tests/test_bedrock.py
