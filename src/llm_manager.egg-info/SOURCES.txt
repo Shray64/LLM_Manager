@@ -21,4 +21,6 @@ src/llm_manager/providers/vLLM.py
 src/llm_manager/utils/__init__.py
 src/llm_manager/utils/config.py
 tests/test.py
+tests/test_azure_async.py
 tests/test_bedrock.py
+tests/test_client_caching.py
