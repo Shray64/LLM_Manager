@@ -37,7 +37,7 @@ print(response)
 
 ## ABACUS ##
 # response = manager.generate("What are the benefits of containerization?",
-#                             model="abacus/o3-higest",
+#                             model="abacus/deepseek-r1",
 #                             max_tokens = 3000,
 #                             )
 # print(response)

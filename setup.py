@@ -18,6 +18,10 @@ setup(
         "tiktoken>=0.4.0",
         "requests>=2.28.0",
         "typing-extensions>=4.5.0",
+        "abacusai>=1.0.0",
+        "boto3>=1.26.0",
+        "aioboto3>=11.0.0",
+        "retry>=0.9.2",
     ],
     extras_require={
         "dev": [
