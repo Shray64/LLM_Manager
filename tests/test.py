@@ -7,7 +7,7 @@ manager = LLMManager()
 # AZURE ##
 
 response = manager.generate("Prove the pythagoras theorem", 
-                            model="azure/o1",
+                            model="ollama/codellama",
                             # max_output_tokens = 3000,
                             # reasoning_effort = "high",
                             # summary_level = "detailed",
