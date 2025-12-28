@@ -137,6 +137,8 @@ providers:
         model_id: "mistral"
       codellama:
         model_id: "codellama"
+      qwen2.5:
+        model_id: "qwen2.5"
       # Add more models as needed
       # Each model can optionally override base_url:
       # custom-model:
