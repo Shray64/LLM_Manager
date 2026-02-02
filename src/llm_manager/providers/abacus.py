@@ -18,9 +18,11 @@ class AbacusProvider(BaseProvider):
         model_config = self.models[model_id]
         client = abacusai.ApiClient(api_key=self.api_key)
 
+        print(model_config.get("model_id"))
+
         response = client.evaluate_prompt(
             prompt=prompt,
-            llm_name=model_config.get("model_id"),
+            llm_name="GEMINI_3_FLASH",
             **kwargs
         )
 

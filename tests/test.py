@@ -6,14 +6,14 @@ manager = LLMManager()
 
 # AZURE ##
 
-response = manager.generate("Prove the pythagoras theorem", 
-                            model="ollama/codellama",
-                            # max_output_tokens = 3000,
-                            # reasoning_effort = "high",
-                            # summary_level = "detailed",
-                            # max_completion_tokens = 3000
-                            )
-print(response)
+# response = manager.generate("Prove the pythagoras theorem", 
+#                             model="ollama/codellama",
+#                             # max_output_tokens = 3000,
+#                             # reasoning_effort = "high",
+#                             # summary_level = "detailed",
+#                             # max_completion_tokens = 3000
+#                             )
+# print(response)
 
 # ANTHROPIC ##
 # response = manager.generate("Explain quantum computing in simple terms", 
@@ -36,11 +36,11 @@ print(response)
 # print(response)
 
 ## ABACUS ##
-# response = manager.generate("What are the benefits of containerization?",
-#                             model="abacus/o3-higest",
-#                             max_tokens = 3000,
-#                             )
-# print(response)
+response = manager.generate("What are the benefits of containerization?",
+                            model="abacus/gemini-3-flash",
+                            max_tokens = 3000,
+                            )
+print(response)
 
 
 # manager.list_models()
