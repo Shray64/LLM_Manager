@@ -6,10 +6,10 @@ manager = LLMManager()
 
 # Ollama ##
 
-response = manager.generate("Prove the pythagoras theorem", 
-                            model="ollama/qwen2.5",
-                            )
-print(response)
+# response = manager.generate("Prove the pythagoras theorem", 
+#                             model="ollama/qwen2.5",
+#                             )
+# print(response)
 
 # AZURE ##
 
@@ -43,11 +43,11 @@ print(response)
 # print(response)
 
 ## ABACUS ##
-# response = manager.generate("What are the benefits of containerization?",
-#                             model="abacus/o3-higest",
-#                             max_tokens = 3000,
-#                             )
-# print(response)
+response = manager.generate("What are the benefits of containerization?",
+                            model="abacus/deepseek-r1",
+                            max_tokens = 3000,
+                            )
+print(response)
 
 
 # manager.list_models()

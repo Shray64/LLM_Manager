@@ -86,7 +86,7 @@ providers:
         model_id: "GEMINI_2_5_PRO"
 
       gemini-3-flash:
-        model_id: "GEMINI_3_FLAH"
+        model_id: "GEMINI_3_FLASH"
 
       deepseek-r1:
         model_id: "DEEPSEEK_R1"
