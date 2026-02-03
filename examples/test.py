@@ -6,21 +6,21 @@ manager = LLMManager()
 
 # Ollama ##
 
-# response = manager.generate("Prove the pythagoras theorem", 
-#                             model="ollama/qwen2.5",
-#                             )
-# print(response)
+response = manager.generate("Prove the pythagoras theorem", 
+                            model="ollama/qwen2.5",
+                            )
+print(response)
 
 # AZURE ##
 
-response = manager.generate("Prove the pythagoras theorem", 
-                            model="azure/gpt4o",
-                            # max_output_tokens = 3000,
-                            # reasoning_effort = "high",
-                            # summary_level = "detailed",
-                            # max_completion_tokens = 3000
-                            )
-print(response)
+# response = manager.generate("Prove the pythagoras theorem", 
+#                             model="azure/o1",
+#                             # max_output_tokens = 3000,
+#                             # reasoning_effort = "high",
+#                             # summary_level = "detailed",
+#                             # max_completion_tokens = 3000
+#                             )
+# print(response)
 
 # ANTHROPIC ##
 # response = manager.generate("Explain quantum computing in simple terms", 
