@@ -13,7 +13,7 @@ providers:
       
       o1-mini:
         api_key: "${AZURE_API_KEY_OLD}"
-        api_version: "${AZURE_API_VERSION:-2023-05-15}"
+        api_version: "${AZURE_API_VERSION:-2024-12-01-preview}"
         azure_endpoint: "${AZURE_API_BASE_OLD}"
         azure_deployment: "${AZURE_o1_mini_DEPLOYMENT}"
         model_id: "o1-mini"
@@ -84,6 +84,9 @@ providers:
     models:
       gemini-2.5-pro:
         model_id: "GEMINI_2_5_PRO"
+
+      gemini-3-flash:
+        model_id: "GEMINI_3_FLAH"
 
       deepseek-r1:
         model_id: "DEEPSEEK_R1"
