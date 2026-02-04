@@ -112,6 +112,7 @@ providers:
       aws_access_key_id: "${AWS_ACCESS_KEY}"
       aws_secret_access_key: "${AWS_SECRET_ACCESS_KEY}"
       models:
+
         claude-sonnet-3.7:
           model_id: "arn:aws:bedrock:us-east-2:931886963315:inference-profile/us.anthropic.claude-3-7-sonnet-20250219-v1:0"
           thinking_supported: true
@@ -120,9 +121,21 @@ providers:
           model_id: "arn:aws:bedrock:us-east-2:931886963315:inference-profile/us.anthropic.claude-sonnet-4-20250514-v1:0"
           thinking_supported: true
 
+        claude-sonnet-4.5:
+          model_id: "arn:aws:bedrock:us-east-2:931886963315:inference-profile/us.anthropic.claude-sonnet-4-5-20250514-v1:0"
+          thinking_supported: true
+
         claude-opus-4:
           model_id: "arn:aws:bedrock:us-east-2:931886963315:inference-profile/anthropic.claude-opus-4-20250514-v1:0"
           thinking_supported: true
+
+        claude-opus-4.5:
+          model_id: "arn:aws:bedrock:us-east-2:931886963315:inference-profile/us.anthropic.claude-opus-4-5-20251101-v1:0"
+          thinking_supported: true
+
+        claude-haiku-4.5:
+          model_id: "arn:aws:bedrock:us-east-2:931886963315:inference-profile/us.anthropic.claude-haiku-4-5-20250514-v1:0"
+          thinking_supported: false
 
   vLLM:
     enabled: true

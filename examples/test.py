@@ -33,21 +33,20 @@ manager = LLMManager()
 
 # AWS BEDROCK ##
 
-# response = manager.generate("Explain quantum computing in simple terms", 
-#                             model="bedrock/claude-sonnet-3.7",
-#                             # max_comp_tokens = 1000,
-#                             max_tokens = 10000, 
-#                             thinking_tokens = 3200,
-#                             temperature = 1)
-# # )
-# print(response)
+response = manager.generate("Explain quantum computing in simple terms", 
+                            model="bedrock/claude-opus-4.5",
+                            # max_comp_tokens = 1000,
+                            max_tokens = 10000, 
+                            thinking_tokens = 3200,
+                            temperature = 1)
+# )
+print(response)
 
 ## ABACUS ##
-response = manager.generate("What are the benefits of containerization?",
-                            model="abacus/deepseek-r1",
-                            max_tokens = 3000,
-                            )
-print(response)
+# response = manager.generate("What are the benefits of containerization?",
+#                             model="abacus/deepseek-r1",
+#                             )
+# print(response)
 
 
 # manager.list_models()
