@@ -65,6 +65,34 @@ providers:
         reasoning_effort: true
         reasoning_summary: true
 
+      # Azure Claude Models (via Azure AI Model Inference)
+      claude-opus-4.5:
+        api_key: "${AZURE_CLAUDE_API_KEY}"
+        api_version: "${AZURE_CLAUDE_API_VERSION:-2024-12-01-preview}"
+        azure_endpoint: "${AZURE_CLAUDE_ENDPOINT}"
+        azure_deployment: "claude-opus-4-5"
+        model_id: "claude-opus-4-5-20251101"
+        model_type: "claude"
+        thinking_supported: true
+      
+      claude-sonnet-4.5:
+        api_key: "${AZURE_CLAUDE_API_KEY}"
+        api_version: "${AZURE_CLAUDE_API_VERSION:-2024-12-01-preview}"
+        azure_endpoint: "${AZURE_CLAUDE_ENDPOINT}"
+        azure_deployment: "claude-sonnet-4-5"
+        model_id: "claude-sonnet-4-5-20250514"
+        model_type: "claude"
+        thinking_supported: true
+      
+      claude-sonnet-4:
+        api_key: "${AZURE_CLAUDE_API_KEY}"
+        api_version: "${AZURE_CLAUDE_API_VERSION:-2024-12-01-preview}"
+        azure_endpoint: "${AZURE_CLAUDE_ENDPOINT}"
+        azure_deployment: "claude-sonnet-4"
+        model_id: "claude-sonnet-4-20250514"
+        model_type: "claude"
+        thinking_supported: true
+
   anthropic:
     enabled: true
     api_key: "${ANTHROPIC_API_KEY}"
